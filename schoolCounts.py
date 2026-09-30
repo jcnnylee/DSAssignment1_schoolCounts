@@ -3,7 +3,9 @@
     Email: Jenny.lee09@myhunter.cuny.edu
     Resources: Used w3schools for append() function.
     Used GeeksforGeeks as a reminder of how to do incrementation/decrementation in Python ,
-    how to iterate key-value pairs , 
+    how to iterate key-value pairs , finding the average of a list 
+    (using either statistics library / loop / or sum) ,
+
 """
 
 import textwrap
@@ -83,6 +85,25 @@ def compute_mean(counts):
     its value (e.g. if the key of 10 has value 8, then the 10 showed up 8 times and adds 
     10*8 to the computation of the average). Returns the mean.
     """
+    ### this function computes the average of the counts in the dictionary {key, value}
+    # ex: {5:3 , 6:2. 8:3} -> 5 periods appear 3 times, etc 
+    # so the average would be (5*3)+(6*2)+(8*3) divided by total values
+    mean = 0
+    overall_total = 0 # if 2 occurences of 4 are counted, multiply 2*4, etc and add each up
+    total_occurences = 0 #if 2 occurences of 4, 2 is counted. add all occurences up to get total
+
+    # check size of dictionary; if empty, return 0
+    if len(counts) == 0:
+        return 0.0
+
+    for key, value in counts.items():
+        overall_total += key * value
+        total_occurences += value
+
+    mean = overall_total / total_occurences
+
+    return mean
+
 
 def main():
     ### Test Output for extract_overviews function on Staten Island Schools:
@@ -101,6 +122,12 @@ def main():
     si_dots_counts = const_num_sentences(si_overviews)
     print(f"The {sum(si_dots_counts.values())} entries have lengths:")
     print(si_dots_counts)
+
+    # 
+    si_len_mean = compute_mean(si_len_counts)
+    si_dots_mean = compute_mean(si_dots_counts)
+    print(f"Staten Island high schools overviews had an average of {si_len_mean:.2f}\
+    characters in {si_dots_mean:.2f} sentences.")
 
 
 if __name__ == "__main__":
