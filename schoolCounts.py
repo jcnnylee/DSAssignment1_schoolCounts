@@ -104,6 +104,53 @@ def compute_mean(counts):
 
     return mean
 
+def compute_mse(theta, counts):
+    """
+    Computes the Mean Squared Error of the parameter theta and a dictionary, counts.
+    Returns the MSE.
+    """
+    mse = 0
+    total_occurences = 0
+    for key, value in counts.items():
+        mse += ((key-theta) **2) * value
+        total_occurences += value
+
+    mse = mse / total_occurences
+
+    return mse
+
+def test_compute_mean(mean_fnc=compute_mean):
+    """
+    Returns True if the mean_fnc performs correctly
+    (e.g. computes weighted mean of inputted dictionary) and False otherwise. 
+    """
+
+    #Placeholder-- replace with your code
+    correct = True
+    return correct
+
+
+def test_mse(mse_fnc=compute_mse):
+    """
+    Returns True if the extract_fnc performs correctly
+    (e.g. computes mean squared error) and False otherwise.
+    """
+
+    #Placeholder-- replace with your code
+    correct = True
+    return correct
+
+def test_count_lengths(counts_fnc=count_lengths):
+    """
+    Returns True if the counts_fnc performs correctly
+    (e.g. counts lengths of overviews and stores in dictionary) & False otherwise.
+    """
+
+    #Placeholder-- replace with your code
+
+    correct = True
+    return correct
+
 
 def main():
     ### Test Output for extract_overviews function on Staten Island Schools:
@@ -129,6 +176,26 @@ def main():
     print(f"Staten Island high schools overviews had an average of {si_len_mean:.2f}\
     characters in {si_dots_mean:.2f} sentences.")
 
+    ###Computing MSE:
+    late_dots_mean = compute_mean(late_dots_counts)
+    print(f"The mean for number of sentences in SI descriptions is {late_dots_mean}.")
+    losses = []
+    for theta in range(10):
+        loss = compute_mse(theta,late_dots_counts)
+        print(f"For theta = {theta}, MSE loss is {loss:.2f}.")
+        losses.append(loss)
+
+    losses = []
+    for theta in range(10):
+        loss = compute_mse(theta,si_dots_counts)
+        print(f"For theta = {theta}, MSE loss is {loss:.2f}.")
+        losses.append(loss)
+
+    ###Testing
+    #Trying first on the correct function:
+    print(f'test_compute_mean(compute_mean) returns {test_compute_mean(compute_mean)}.')
+    #Trying on a function that returns 42 no matter what the output:
+    print(f'test_compute_mean( lambda x : 42 ) returns {test_compute_mean(lambda x : 42)}.')
 
 if __name__ == "__main__":
     main()
