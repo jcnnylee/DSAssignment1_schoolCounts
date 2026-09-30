@@ -23,8 +23,9 @@ def extract_overviews(file_name):
     # Open the file_name
     with open(file_name, encoding="utf-8") as data_file:
         reader = csv.reader(data_file)
-        skip_header = next(data_file)
-        overviews = skip_header.index("overview_paragraph")  # finds where overview paragraph exists in the list
+
+        skip_header = next(reader)
+        overviews = skip_header.index("overview_paragraph")
 
         # loops through csv one row at a time and adds to list
         for row in reader:
