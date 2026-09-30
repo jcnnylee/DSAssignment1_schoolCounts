@@ -3,7 +3,7 @@
     Email: Jenny.lee09@myhunter.cuny.edu
     Resources: Used w3schools for append() function.
     Used GeeksforGeeks as a reminder of how to do incrementation/decrementation in Python ,
-    how to iterate key-value pairs , finding the average of a list 
+    how to iterate key-value pairs , finding the average of a list
     (using either statistics library / loop / or sum) ,
 
 """
@@ -32,10 +32,10 @@ def extract_overviews(file_name):
 
 def count_lengths(overview_list):
     """
-    For each element of the overview_list, the function computes the length 
-    (the number of characters in the string). The results are stored in a 
-    dictionary of length occurrences where the keys are the lengths seen in 
-    overview_list and the values are the number of times each length occurs. 
+    For each element of the overview_list, the function computes the length
+    (the number of characters in the string). The results are stored in a
+    dictionary of length occurrences where the keys are the lengths seen in
+    overview_list and the values are the number of times each length occurs.
     Returns the dictionary of length occurrences.
     """
     #dictionary: keys = lengths in list & values = # of times each length occurs
@@ -57,9 +57,9 @@ def count_lengths(overview_list):
 
 def const_num_sentences(overview_list):
     """
-    For each element of the overview_list, the function computes the number of periods (.) 
+    For each element of the overview_list, the function computes the number of periods (.)
     (as a proxy for the number of sentences). The results are stored in
-    a dictionary of occurrences where the keys are the number of periods 
+    a dictionary of occurrences where the keys are the number of periods
     seen in overview_list and the values are the number of times each occurs.
     Returns the dictionary of occurrences.
     """
@@ -81,12 +81,12 @@ def const_num_sentences(overview_list):
 
 def compute_mean(counts):
     """
-    Computes the mean (average) of counts dictionary weighting each key that occurs by 
-    its value (e.g. if the key of 10 has value 8, then the 10 showed up 8 times and adds 
+    Computes the mean (average) of counts dictionary weighting each key that occurs by
+    its value (e.g. if the key of 10 has value 8, then the 10 showed up 8 times and adds
     10*8 to the computation of the average). Returns the mean.
     """
     ### this function computes the average of the counts in the dictionary {key, value}
-    # ex: {5:3 , 6:2. 8:3} -> 5 periods appear 3 times, etc 
+    # ex: {5:3 , 6:2. 8:3} -> 5 periods appear 3 times, etc
     # so the average would be (5*3)+(6*2)+(8*3) divided by total values
     mean = 0
     overall_total = 0 # if 2 occurences of 4 are counted, multiply 2*4, etc and add each up
@@ -111,7 +111,7 @@ def compute_mse(theta, counts):
     """
     if len(counts) == 0:
         return 0.0
-    
+
     mse = 0
     total_occurences = 0
     for key, value in counts.items():
@@ -125,7 +125,7 @@ def compute_mse(theta, counts):
 def test_compute_mean(mean_fnc=compute_mean):
     """
     Returns True if the mean_fnc performs correctly
-    (e.g. computes weighted mean of inputted dictionary) and False otherwise. 
+    (e.g. computes weighted mean of inputted dictionary) and False otherwise.
     """
     correct = True
 
@@ -179,7 +179,7 @@ def main():
     ### Test output for constant model functions on Staten Island Schools:
     # Count of total characters in an overview and it's number of occurences
     si_len_counts = count_lengths(si_overviews)
-    print(f"The {sum(si_len_counts.values())} entries have lengths:")    
+    print(f"The {sum(si_len_counts.values())} entries have lengths:")
     print(si_len_counts)
 
     # Count of total periods in an overview and it's number of occurences
@@ -187,7 +187,7 @@ def main():
     print(f"The {sum(si_dots_counts.values())} entries have lengths:")
     print(si_dots_counts)
 
-    # 
+    # Mean
     si_len_mean = compute_mean(si_len_counts)
     si_dots_mean = compute_mean(si_dots_counts)
     print(f"Staten Island high schools overviews had an average of {si_len_mean:.2f}\
