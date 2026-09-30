@@ -109,6 +109,9 @@ def compute_mse(theta, counts):
     Computes the Mean Squared Error of the parameter theta and a dictionary, counts.
     Returns the MSE.
     """
+    if len(counts) == 0:
+        return 0.0
+    
     mse = 0
     total_occurences = 0
     for key, value in counts.items():
@@ -124,9 +127,12 @@ def test_compute_mean(mean_fnc=compute_mean):
     Returns True if the mean_fnc performs correctly
     (e.g. computes weighted mean of inputted dictionary) and False otherwise. 
     """
-
-    #Placeholder-- replace with your code
     correct = True
+
+    #5*2 = 10, 8*1 = 8, 10+8 = 18, 18/3 = 6
+    test_counts = {5:2, 8:1}
+    if mean_fnc(test_counts) != 6:
+        correct = False
     return correct
 
 
@@ -136,8 +142,12 @@ def test_mse(mse_fnc=compute_mse):
     (e.g. computes mean squared error) and False otherwise.
     """
 
-    #Placeholder-- replace with your code
     correct = True
+    test_counts = {5:2, 8:1}
+
+    if mse_fnc(6, test_counts) != 2:
+        correct = False
+
     return correct
 
 def test_count_lengths(counts_fnc=count_lengths):
@@ -146,13 +156,20 @@ def test_count_lengths(counts_fnc=count_lengths):
     (e.g. counts lengths of overviews and stores in dictionary) & False otherwise.
     """
 
-    #Placeholder-- replace with your code
-
     correct = True
+    overview_test = ["Python", "Mean", "Length"]
+    actual_counts = {6:2, 4:1}
+
+    if counts_fnc(overview_test) != actual_counts:
+        correct = False
+
     return correct
 
 
 def main():
+    """
+    Some examples of the functions in use:
+    """
     ### Test Output for extract_overviews function on Staten Island Schools:
     file_name = '2021_DOE_High_School_Directory_20260925.csv'
     si_overviews = extract_overviews(file_name)
@@ -177,14 +194,6 @@ def main():
     characters in {si_dots_mean:.2f} sentences.")
 
     ###Computing MSE:
-    late_dots_mean = compute_mean(late_dots_counts)
-    print(f"The mean for number of sentences in SI descriptions is {late_dots_mean}.")
-    losses = []
-    for theta in range(10):
-        loss = compute_mse(theta,late_dots_counts)
-        print(f"For theta = {theta}, MSE loss is {loss:.2f}.")
-        losses.append(loss)
-
     losses = []
     for theta in range(10):
         loss = compute_mse(theta,si_dots_counts)
