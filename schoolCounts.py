@@ -9,6 +9,7 @@
 """
 
 import textwrap
+import csv
 
 def extract_overviews(file_name):
     """
@@ -20,13 +21,14 @@ def extract_overviews(file_name):
     lst = []
 
     # Open the file_name
-    with open(file_name, encoding="utf-8") as md:
-        #ignore the first row
-        next(md)
-        for line in md:
-            column = line.split('","')  #splits the row based on ","
-            overviews = column[4].split('",', 1)  #splits everything after overview ", one time
-            lst.append(overviews[0])  #adds just the overview text to the list
+    with open(file_name, encoding="utf-8") as data_file:
+        reader = csv.reader(data_file)
+        skip_header = next(data_file)
+        overviews = skip_header.index("overview_paragraph")  # finds where overview paragraph exists in the list
+
+        # loops through csv one row at a time and adds to list
+        for row in reader:
+            lst.append(row[overviews])
 
     return lst
 
