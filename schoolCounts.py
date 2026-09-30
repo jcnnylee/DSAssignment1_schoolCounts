@@ -24,9 +24,9 @@ def extract_overviews(file_name):
         #ignore the first row
         next(md)
         for line in md:
-            column = line.split('","') #splits the row based on ","
-            overviews = column[4].split('",',1) #splits everything after overview ", one time
-            lst.append(overviews[0]) #adds just the overview text to the list
+            column = line.split('","')  #splits the row based on ","
+            overviews = column[4].split('",', 1)  #splits everything after overview ", one time
+            lst.append(overviews[0])  #adds just the overview text to the list
 
     return lst
 
@@ -45,7 +45,7 @@ def count_lengths(overview_list):
     # if length once appears, increment the count for that length
     # if it does not appear, set it to 1
     for overview in overview_list:
-        length = len(overview) #stores the length of each overview
+        length = len(overview)  #stores the length of each overview
 
         if length in counts:
             counts[length] = counts[length] + 1
@@ -115,7 +115,7 @@ def compute_mse(theta, counts):
     mse = 0
     total_occurences = 0
     for key, value in counts.items():
-        mse += ((key-theta) **2) * value
+        mse += ((key - theta) ** 2) * value
         total_occurences += value
 
     mse = mse / total_occurences
@@ -130,7 +130,7 @@ def test_compute_mean(mean_fnc=compute_mean):
     correct = True
 
     #5*2 = 10, 8*1 = 8, 10+8 = 18, 18/3 = 6
-    test_counts = {5:2, 8:1}
+    test_counts = {5: 2, 8: 1}
     if mean_fnc(test_counts) != 6:
         correct = False
     return correct
@@ -143,7 +143,7 @@ def test_mse(mse_fnc=compute_mse):
     """
 
     correct = True
-    test_counts = {5:2, 8:1}
+    test_counts = {5: 2, 8: 1}
 
     if mse_fnc(6, test_counts) != 2:
         correct = False
@@ -158,7 +158,7 @@ def test_count_lengths(counts_fnc=count_lengths):
 
     correct = True
     overview_test = ["Python", "Mean", "Length"]
-    actual_counts = {6:2, 4:1}
+    actual_counts = {6: 2, 4: 1}
 
     if counts_fnc(overview_test) != actual_counts:
         correct = False
